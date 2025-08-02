@@ -1,0 +1,521 @@
+.card-pack-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  z-index: 1000;
+  overflow: hidden;
+  will-change: opacity;
+  transform: translateZ(0);
+}
+
+.pack-background-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, rgba(255, 165, 0, 0.2) 30%, transparent 70%);
+  border-radius: 50%;
+  animation: glow-pulse 3s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.pack-container {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.pack-container:hover {
+  transform: scale(1.05) translateZ(0);
+}
+
+.pack-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Pack Top (will be cut off) */
+.pack-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5%;
+  transform-origin: bottom center;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.pack-front-top {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  border-radius: 20px 20px 0 0;
+  border: 3px solid #4a5568;
+  border-bottom: none;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    inset 0 2px 10px rgba(255, 255, 255, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 20px;
+  transform: rotateY(0deg);
+  backface-visibility: hidden;
+  transition: all 0.3s ease;
+  will-change: transform, box-shadow;
+}
+
+.pack-container:hover .pack-front-top {
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.4),
+    inset 0 2px 10px rgba(255, 255, 255, 0.4),
+    0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+/* Pack Bottom (remains) */
+.pack-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 95%;
+  transform-origin: top center;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.pack-front-bottom {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  border-radius: 0 0 20px 20px;
+  border: 3px solid #4a5568;
+  border-top: none;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    inset 0 2px 10px rgba(255, 255, 255, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 20px 20px 20px;
+  transform: rotateY(0deg);
+  backface-visibility: hidden;
+  transition: all 0.3s ease;
+  will-change: transform, box-shadow;
+}
+
+.pack-container:hover .pack-front-bottom {
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.4),
+    inset 0 2px 10px rgba(255, 255, 255, 0.4),
+    0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.pack-logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.pack-brand {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 5px;
+  transition: all 0.3s ease;
+  will-change: transform, text-shadow;
+}
+
+.pack-container:hover .pack-brand {
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  transform: scale(1.05);
+}
+
+.pack-title {
+  font-size: 12px;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.pack-art {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  margin: 10px 0;
+  transition: all 0.3s ease;
+  will-change: background, box-shadow;
+}
+
+.pack-container:hover .pack-art {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.card-symbol {
+  font-size: 80px;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
+  will-change: transform, filter;
+}
+
+.pack-container:hover .card-symbol {
+  filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.5));
+  transform: scale(1.1);
+}
+
+.pack-details {
+  text-align: center;
+}
+
+.pack-series {
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  margin-bottom: 5px;
+  transition: all 0.3s ease;
+  will-change: text-shadow;
+}
+
+.pack-container:hover .pack-series {
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.pack-cards {
+  font-size: 12px;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Pack Back */
+.pack-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
+  border-radius: 20px;
+  border: 3px solid #4a5568;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    inset 0 2px 10px rgba(255, 255, 255, 0.1);
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pack-back-pattern {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 10px;
+  width: 80%;
+  height: 80%;
+}
+
+.pattern-element {
+  font-size: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.3);
+  animation: pattern-float 4s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Sparkle Effects */
+.sparkles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.sparkle-1 {
+  top: 20%;
+  left: 20%;
+}
+
+.sparkle-2 {
+  top: 30%;
+  right: 25%;
+}
+
+.sparkle-3 {
+  bottom: 30%;
+  left: 30%;
+}
+
+.sparkle-4 {
+  bottom: 20%;
+  right: 20%;
+}
+
+.sparkle-5 {
+  top: 50%;
+  left: 50%;
+}
+
+/* Reveal Card */
+.reveal-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  height: 500px;
+  z-index: 20;
+  will-change: transform, opacity;
+}
+
+.card-glow {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, rgba(255, 165, 0, 0.2) 50%, transparent 100%);
+  border-radius: 30px;
+  animation: card-glow-pulse 2s ease-in-out infinite;
+  will-change: opacity;
+}
+
+.card-placeholder {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    inset 0 2px 10px rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.card-shine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+  animation: card-shine 3s ease-in-out infinite;
+  will-change: transform;
+}
+
+.card-content {
+  text-align: center;
+  z-index: 2;
+}
+
+.card-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 10px;
+}
+
+.card-subtitle {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Instruction Text */
+.pack-instruction {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  text-align: center;
+  animation: instruction-pulse 3s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+.pack-instruction.show {
+  opacity: 1;
+}
+
+/* Keyframe Animations */
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+@keyframes pattern-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(180deg);
+  }
+}
+
+@keyframes card-glow-pulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes card-shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%);
+  }
+}
+
+@keyframes instruction-pulse {
+  0%, 100% {
+    opacity: 0.8;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.05);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pack-container {
+    width: 250px;
+    height: 350px;
+  }
+
+  .pack-brand {
+    font-size: 20px;
+  }
+
+  .pack-title {
+    font-size: 10px;
+  }
+
+  .card-symbol {
+    font-size: 60px;
+  }
+
+  .pack-series {
+    font-size: 12px;
+  }
+
+  .pack-cards {
+    font-size: 10px;
+  }
+
+  .reveal-card {
+    width: 280px;
+    height: 400px;
+  }
+
+  .card-title {
+    font-size: 24px;
+  }
+
+  .card-subtitle {
+    font-size: 14px;
+  }
+
+  .pack-instruction {
+    font-size: 16px;
+    bottom: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pack-container {
+    width: 200px;
+    height: 280px;
+  }
+
+  .pack-brand {
+    font-size: 18px;
+  }
+
+  .pack-title {
+    font-size: 9px;
+  }
+
+  .card-symbol {
+    font-size: 50px;
+  }
+
+  .pack-series {
+    font-size: 11px;
+  }
+
+  .pack-cards {
+    font-size: 9px;
+  }
+
+  .reveal-card {
+    width: 220px;
+    height: 320px;
+  }
+
+  .card-title {
+    font-size: 20px;
+  }
+
+  .card-subtitle {
+    font-size: 12px;
+  }
+
+  .pack-instruction {
+    font-size: 14px;
+    bottom: 20px;
+  }
+} 
