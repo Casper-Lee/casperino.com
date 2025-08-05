@@ -29,6 +29,8 @@
 }
 
 .pc-card-wrapper {
+  display: flex;
+  justify-content: center;
   perspective: 1000px;
   transform: translate3d(0, 0, 0.1px);
   position: relative;
@@ -641,10 +643,10 @@
   position: absolute;
   top: 0;
   left: 0;
-  /* right: 0; */
+  right: 0;
   bottom: 0;
   /* background: rgba(0, 0, 0, 0.8); */
-  backdrop-filter: blur(10px);
+  /* backdrop-filter: blur(10px); */
   display: flex;
   align-items: center;
   justify-content: center;
