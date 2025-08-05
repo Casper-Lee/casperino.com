@@ -38,8 +38,10 @@ export default function Home() {
           />
         </div>
       ),
-      label: "Home",
-      onClick: () => handleNavigate("/"),
+      label: "Card Opening",
+      onClick: () => {
+        setShowProfileCard(false);
+      },
     },
     {
       icon: (
