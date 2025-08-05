@@ -29,8 +29,8 @@
 
 .pack-container {
   position: relative;
-  width: 300px;
-  height: 500px;
+  width: 346px;
+  height: 560px;
   perspective: 1000px;
   transform-style: preserve-3d;
   transition: transform 0.3s ease;
