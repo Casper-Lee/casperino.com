@@ -130,13 +130,15 @@
 }
 
 .pc-bg-img {
-  border-radius: calc(var(--card-radius) - 2px);
-  filter: brightness(0.8) contrast(1.1);
-  transition: filter 0.3s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(1.3) contrast(1.1);
+  transition: all 0.3s ease;
 }
 
 .pc-card:hover .pc-bg-img {
-  filter: brightness(0.9) contrast(1.2);
+  filter: brightness(1.4) contrast(1.2);
 }
 
 /* Content Overlay */

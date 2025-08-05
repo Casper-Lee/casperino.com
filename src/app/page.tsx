@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import ProfileCard from "./components/ProfileCard/ProfileCard";
 import CardPackAnimation from "./components/CardPackAnimation/CardPackAnimation";
-import me from "../../public/image.jpg";
+import photo from "../../public/photo.jpg";
 import Dock from "./components/Dock/Dock";
 import linkedin from "../../public/linkedin.svg";
 import house from "../../public/house.svg";
@@ -89,10 +89,10 @@ export default function Home() {
           <ProfileCard
             name="Casper"
             title="Full Stack Developer"
-            handle="FriendlyGhostCasper"
-            status="Online"
+            handle="Casper"
+            status="Coding"
             contactText="Contact Me"
-            avatarUrl={me}
+            avatarUrl={photo}
             showUserInfo={true}
             enableTilt={true}
             enableMobileTilt={false}
