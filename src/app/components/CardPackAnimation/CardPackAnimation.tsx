@@ -222,26 +222,24 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
         <div className="pack-wrapper">
           {/* Pack top (will be cut off) */}
           <div ref={packTopRef} className="pack-top">
-            <div className="pack-front-top text-center">
-              Software Developer
-              {/* Top flap - just a small decorative element */}
+            <div className="pack-front-top">
+              <div className="pack-top-content">
+                <div className="pack-top-logo">PORTFOLIO</div>
+                <div className="pack-top-subtitle">DEVELOPER PACK</div>
+                <div className="pack-top-series">Premium Collection</div>
+                <div className="pack-top-description">Special Edition</div>
+              </div>
             </div>
           </div>
 
           {/* Pack bottom (remains) */}
           <div ref={packBottomRef} className="pack-bottom">
             <div className="pack-front-bottom">
-              <div className="pack-logo">
-                <div className="pack-brand">Software Developer</div>
-                <div className="pack-title">Card Collection</div>
-              </div>
-              <div className="pack-art">
-                <div className="card-symbol">🃏</div>
-              </div>
-              <div className="pack-details">
-                <div className="pack-series">Premium Edition</div>
-                <div className="pack-cards">Special Card</div>
-              </div>
+              <img 
+                src="/cuteghost_v2.jpg" 
+                alt="Cute Ghost" 
+                className="pack-ghost-full-image"
+              />
             </div>
           </div>
 

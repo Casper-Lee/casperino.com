@@ -30,7 +30,7 @@
 .pack-container {
   position: relative;
   width: 300px;
-  height: 400px;
+  height: 500px;
   perspective: 1000px;
   transform-style: preserve-3d;
   transition: transform 0.3s ease;
@@ -56,7 +56,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 5%;
+  height: 20%;
   transform-origin: bottom center;
   will-change: transform;
   transform: translateZ(0);
@@ -69,14 +69,14 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
   border-radius: 20px 20px 0 0;
   border: 3px solid #4a5568;
-  border-bottom: none;
+  border-bottom: 1px solid rgba(74, 85, 104, 0.3);
   box-shadow: 
     0 10px 30px rgba(0, 0, 0, 0.3),
     inset 0 2px 10px rgba(255, 255, 255, 0.3);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 20px;
+  padding: 15px 20px;
   transform: rotateY(0deg);
   backface-visibility: hidden;
   transition: all 0.3s ease;
@@ -90,13 +90,53 @@
     0 0 20px rgba(255, 215, 0, 0.3);
 }
 
+.pack-top-content {
+  text-align: center;
+}
+
+.pack-top-logo {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 4px;
+  transition: all 0.3s ease;
+  will-change: transform, text-shadow;
+}
+
+.pack-top-subtitle {
+  font-size: 10px;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  margin-bottom: 3px;
+}
+
+.pack-top-series {
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  margin-bottom: 2px;
+}
+
+.pack-top-description {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.pack-container:hover .pack-top-logo {
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  transform: scale(1.05);
+}
+
 /* Pack Bottom (remains) */
 .pack-bottom {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 95%;
+  height: 80%;
   transform-origin: top center;
   will-change: transform;
   transform: translateZ(0);
@@ -109,18 +149,19 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
   border-radius: 0 0 20px 20px;
   border: 3px solid #4a5568;
-  border-top: none;
+  border-top: 1px solid rgba(74, 85, 104, 0.3);
   box-shadow: 
     0 10px 30px rgba(0, 0, 0, 0.3),
     inset 0 2px 10px rgba(255, 255, 255, 0.3);
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 20px 20px 20px 20px;
+  align-items: center;
+  justify-content: center;
   transform: rotateY(0deg);
   backface-visibility: hidden;
   transition: all 0.3s ease;
   will-change: transform, box-shadow;
+  overflow: hidden;
+  padding: 0;
 }
 
 .pack-container:hover .pack-front-bottom {
@@ -128,6 +169,162 @@
     0 15px 40px rgba(0, 0, 0, 0.4),
     inset 0 2px 10px rgba(255, 255, 255, 0.4),
     0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.pack-ghost-full-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+  will-change: transform, filter;
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.pack-container:hover .pack-ghost-full-image {
+  transform: scale(1.02);
+  filter: brightness(1.05) contrast(1.05);
+}
+
+/* Top band with logo */
+.pack-top-band {
+  background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+  padding: 8px 12px;
+  text-align: center;
+  border-bottom: 2px solid #1a202c;
+  position: relative;
+}
+
+.pack-top-band::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 5px,
+    rgba(255, 255, 255, 0.1) 5px,
+    rgba(255, 255, 255, 0.1) 10px
+  );
+  pointer-events: none;
+}
+
+.pack-main-logo {
+  font-size: 16px;
+  font-weight: bold;
+  color: #f7fafc;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  margin-bottom: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+.pack-subtitle {
+  font-size: 8px;
+  color: #e2e8f0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  margin-bottom: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+.pack-series-name {
+  font-size: 10px;
+  color: #cbd5e0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  position: relative;
+  z-index: 1;
+}
+
+/* Main illustration area */
+.pack-main-art {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.pack-main-art::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.pack-ghost-illustration {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: all 0.3s ease;
+  will-change: transform, filter;
+  position: relative;
+  z-index: 1;
+}
+
+.pack-container:hover .pack-ghost-illustration {
+  transform: scale(1.05);
+  filter: brightness(1.1) contrast(1.1);
+}
+
+/* Bottom band with title */
+.pack-bottom-band {
+  background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+  padding: 8px 12px;
+  text-align: center;
+  border-top: 2px solid #1a202c;
+  position: relative;
+}
+
+.pack-bottom-band::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 5px,
+    rgba(255, 255, 255, 0.1) 5px,
+    rgba(255, 255, 255, 0.1) 10px
+  );
+  pointer-events: none;
+}
+
+.pack-collection-name {
+  font-size: 12px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  margin-bottom: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+.pack-character-name {
+  font-size: 10px;
+  color: #f56565;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
 }
 
 .pack-logo {
