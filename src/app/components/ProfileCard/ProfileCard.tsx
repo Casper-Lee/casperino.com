@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useCallback, useMemo, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import "./ProfileCard.css";
+import { trackExperienceClick } from "../../utils/gtm";
 
 // TypeScript interfaces
 interface AnimationConfig {
@@ -341,6 +342,8 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   }, [onContactClick]);
 
   const handleFlipClick = useCallback((): void => {
+    // Track experience button click
+    trackExperienceClick();
     setIsFlipped(!isFlipped);
   }, [isFlipped]);
 

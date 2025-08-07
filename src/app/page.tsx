@@ -10,6 +10,10 @@ import linkedin from "../../public/linkedin.svg";
 import house from "../../public/house.svg";
 import github from "../../public/github.svg";
 import { useRouter } from "next/navigation";
+import { 
+  trackCardOpening, 
+  trackDockClick 
+} from "./utils/gtm";
 
 export default function Home() {
   const [showProfileCard, setShowProfileCard] = useState(false);
@@ -56,7 +60,10 @@ export default function Home() {
         </div>
       ),
       label: "LinkedIn",
-      onClick: () => handleNavigate("https://www.linkedin.com/in/casper-ljy"),
+      onClick: () => {
+        trackDockClick("LinkedIn", "https://www.linkedin.com/in/casper-ljy");
+        handleNavigate("https://www.linkedin.com/in/casper-ljy");
+      },
     },
     {
       icon: (
@@ -71,11 +78,17 @@ export default function Home() {
         </div>
       ),
       label: "Github",
-      onClick: () => handleNavigate("https://github.com/Casper-Lee"),
+      onClick: () => {
+        trackDockClick("Github", "https://github.com/Casper-Lee");
+        handleNavigate("https://github.com/Casper-Lee");
+      },
     },
   ];
 
   const handleAnimationComplete = () => {
+    // Track card opening event
+    trackCardOpening();
+    
     // Add a small delay to ensure smooth transition
     setTimeout(() => {
       setShowProfileCard(true);
