@@ -97,7 +97,7 @@ export default function Home() {
 
   const experience = [
     {
-      company: "Govtech Singapore (SkillsFuture)",
+      company: "Govtech Singapore",
       position: "Software Engineer",
       duration: "Dec 2024 - Present",
       description:

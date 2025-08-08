@@ -36,7 +36,6 @@ export const trackCardOpening = (): void => {
   };
   
   pushToDataLayer(event);
-  console.log('GTM: Card Opening Tracked');
 };
 
 // Track experience button click
@@ -49,7 +48,6 @@ export const trackExperienceClick = (): void => {
   };
   
   pushToDataLayer(event);
-  console.log('GTM: Experience Click Tracked');
 };
 
 // Track profile interactions
@@ -62,7 +60,6 @@ export const trackProfileClick = (action: string): void => {
   };
   
   pushToDataLayer(event);
-  console.log('GTM: Profile Click Tracked', action);
 };
 
 // Track dock navigation
@@ -76,7 +73,6 @@ export const trackDockClick = (label: string, url: string): void => {
   };
   
   pushToDataLayer(event);
-  console.log('GTM: Dock Click Tracked', label);
 };
 
 export default {

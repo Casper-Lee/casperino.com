@@ -345,7 +345,7 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
 
       {/* Instruction text */}
       <div className={`pack-instruction ${!animationStarted ? "show" : ""}`}>
-        Click to open your mystery pack!
+        Click to open your developer pack!
       </div>
     </div>
   );
