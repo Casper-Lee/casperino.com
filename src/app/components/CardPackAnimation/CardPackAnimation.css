@@ -61,6 +61,13 @@
   transform-origin: bottom center;
   will-change: transform;
   transform: translateZ(0);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Final position for top section after cutting */
+.pack-top.split {
+  transform: translateY(-30px) rotateX(-25deg) translateZ(0);
 }
 
 .pack-front-top {
@@ -82,6 +89,7 @@
   backface-visibility: hidden;
   transition: all 0.3s ease;
   will-change: transform, box-shadow;
+  transform-style: preserve-3d;
 }
 
 .pack-container:hover .pack-front-top {
@@ -141,6 +149,13 @@
   transform-origin: top center;
   will-change: transform;
   transform: translateZ(0);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Final position for bottom section after cutting */
+.pack-bottom.split {
+  transform: translateY(-5px) rotateX(2deg) translateZ(0);
 }
 
 .pack-front-bottom {
@@ -163,6 +178,7 @@
   will-change: transform, box-shadow;
   overflow: hidden;
   padding: 0;
+  transform-style: preserve-3d;
 }
 
 .pack-container:hover .pack-front-bottom {
@@ -183,6 +199,8 @@
   margin: 0;
   padding: 0;
   display: block;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .pack-container:hover .pack-ghost-full-image {
@@ -727,6 +745,8 @@
   height: 100%;
   pointer-events: none;
   z-index: 15;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .burst-star {
@@ -734,6 +754,8 @@
   font-size: 20px;
   filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
   will-change: transform, opacity;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .burst-star-1 {

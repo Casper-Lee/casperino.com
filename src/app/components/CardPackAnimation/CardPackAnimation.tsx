@@ -59,7 +59,6 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
       })
       .to(packRef.current, {
         y: -25,
-        rotationY: 20,
         duration: 0.8,
         ease: "power2.out",
       });
@@ -72,6 +71,16 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
         rotationX: -25,
         duration: 0.8,
         ease: "power2.inOut",
+        onComplete: () => {
+          // Lock the top section in its final position
+          gsap.set(packTopRef.current, {
+            y: -30,
+            rotationX: -25,
+            clearProps: "none"
+          });
+          // Add CSS class to maintain position
+          packTopRef.current?.classList.add('split');
+        },
       },
       "-=0.4"
     ).to(
@@ -81,6 +90,16 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
         rotationX: 2,
         duration: 0.6,
         ease: "power2.inOut",
+        onComplete: () => {
+          // Lock the bottom section in its final position
+          gsap.set(packBottomRef.current, {
+            y: -5,
+            rotationX: 2,
+            clearProps: "none"
+          });
+          // Add CSS class to maintain position
+          packBottomRef.current?.classList.add('split');
+        },
       },
       "-=0.6"
     );
@@ -132,7 +151,7 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
         "-=1.0"
       );
 
-    // Pack fade out
+    // Pack fade out - maintain split positions
     tl.to(
       packRef.current,
       {
@@ -141,6 +160,23 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
         opacity: 0,
         duration: 1.0,
         ease: "power2.in",
+        onUpdate: () => {
+          // Continuously maintain pack sections in their split positions
+          if (packTopRef.current) {
+            gsap.set(packTopRef.current, {
+              y: -30,
+              rotationX: -25,
+              clearProps: "none"
+            });
+          }
+          if (packBottomRef.current) {
+            gsap.set(packBottomRef.current, {
+              y: -5,
+              rotationX: 2,
+              clearProps: "none"
+            });
+          }
+        }
       },
       "-=0.6"
     );
