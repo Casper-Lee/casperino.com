@@ -95,6 +95,16 @@ export default function Home() {
     }, 100);
   };
 
+  const handleContactClick = () => {
+    // Redirect to Gmail with pre-filled email
+    const email = "xxxxx@gmail.com";
+    
+    // Gmail compose URL with pre-filled fields
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`;
+    
+    window.open(gmailUrl, '_blank');
+  };
+
   const experience = [
     {
       company: "Govtech Singapore",
@@ -135,7 +145,7 @@ export default function Home() {
             showUserInfo={true}
             enableTilt={true}
             enableMobileTilt={false}
-            onContactClick={() => console.log("Contact clicked")}
+            onContactClick={handleContactClick}
             experience={experience}
           />
           <Dock

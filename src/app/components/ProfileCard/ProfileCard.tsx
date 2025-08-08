@@ -426,6 +426,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               style={{ objectFit: "cover" }}
+              alt="background"
             />
           </div>
 
@@ -455,6 +456,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                         "pc-mini-avatar-img", 
                         false
                       )}
+                      alt="mini avatar"
                       fill
                       sizes="40px"
                       style={{ objectFit: "cover" }}
