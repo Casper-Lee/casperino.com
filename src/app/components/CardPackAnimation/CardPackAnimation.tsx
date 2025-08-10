@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import "./CardPackAnimation.css";
+import Image from "next/image";
 
 interface CardPackAnimationProps {
   onAnimationComplete: () => void;
@@ -106,7 +107,7 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
 
     // Smooth star burst animation
     tl.to(
-      burstStarsRef.current?.children,
+      burstStarsRef.current!.children,
       {
         scale: 1,
         opacity: 1,
@@ -116,7 +117,7 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
       "-=0.4"
     )
       .to(
-        burstStarsRef.current?.children,
+        burstStarsRef.current!.children,
         {
           x: (i) => {
             const positions = [
@@ -141,7 +142,7 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
         "-=0.1"
       )
       .to(
-        burstStarsRef.current?.children,
+        burstStarsRef.current!.children,
         {
           scale: 0,
           opacity: 0,
@@ -195,7 +196,7 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
 
     // Sparkle effects
     tl.to(
-      sparklesRef.current?.children,
+      sparklesRef.current!.children,
       {
         scale: 1.8,
         opacity: 1,
@@ -205,7 +206,7 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
       },
       "-=0.8"
     ).to(
-      sparklesRef.current?.children,
+      sparklesRef.current!.children,
       {
         scale: 0,
         opacity: 0,
@@ -220,8 +221,8 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
   useEffect(() => {
     // Initial animations with smoother setup
     gsap.set(revealCardRef.current, { scale: 0, opacity: 0 });
-    gsap.set(sparklesRef.current?.children, { scale: 0, opacity: 0 });
-    gsap.set(burstStarsRef.current?.children, { scale: 0, opacity: 0 });
+    gsap.set(sparklesRef.current!.children, { scale: 0, opacity: 0 });
+    gsap.set(burstStarsRef.current!.children, { scale: 0, opacity: 0 });
 
     // Smoother floating animation for pack
     gsap.to(packRef.current, {
@@ -271,8 +272,10 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
           {/* Pack bottom (remains) */}
           <div ref={packBottomRef} className="pack-bottom">
             <div className="pack-front-bottom">
-              <img 
+              <Image 
                 src="/cuteghost_v2.jpg" 
+                width={200}
+                height={200}
                 alt="Cute Ghost" 
                 className="pack-ghost-full-image"
               />

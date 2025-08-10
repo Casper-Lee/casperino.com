@@ -52,10 +52,6 @@ interface DeviceOrientationEvent extends Event {
   gamma: number | null;
 }
 
-interface DeviceMotionEvent extends Event {
-  requestPermission?: () => Promise<string>;
-}
-
 // Extend Window interface for device orientation
 declare global {
   interface Window {
