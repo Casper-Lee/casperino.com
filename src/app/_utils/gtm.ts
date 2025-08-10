@@ -5,12 +5,15 @@ interface GTMEvent {
   event_category?: string;
   event_action?: string;
   event_label?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 
 // Initialize GTM dataLayer
 const initializeDataLayer = (): void => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if (typeof window !== 'undefined' && !(window as any).dataLayer) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).dataLayer = [];
   }
 };
@@ -19,6 +22,7 @@ const initializeDataLayer = (): void => {
 const pushToDataLayer = (event: GTMEvent): void => {
   if (typeof window !== 'undefined') {
     initializeDataLayer();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const dataLayer = (window as any).dataLayer;
     if (dataLayer) {
       dataLayer.push(event);
@@ -75,6 +79,7 @@ export const trackDockClick = (label: string, url: string): void => {
   pushToDataLayer(event);
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   trackCardOpening,
   trackExperienceClick,

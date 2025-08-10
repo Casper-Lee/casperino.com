@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useCallback, useMemo, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import "./ProfileCard.css";
-import { trackExperienceClick } from "../../utils/gtm";
+import { trackExperienceClick } from "../../_utils/gtm";
 
 // TypeScript interfaces
 interface AnimationConfig {

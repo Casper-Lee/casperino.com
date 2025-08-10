@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import { 
   trackCardOpening, 
   trackDockClick 
-} from "./utils/gtm";
+} from "./_utils/gtm";
 
 export default function Home() {
   const [showProfileCard, setShowProfileCard] = useState(false);
@@ -86,20 +86,16 @@ export default function Home() {
   ];
 
   const handleAnimationComplete = () => {
-    // Track card opening event
     trackCardOpening();
     
-    // Add a small delay to ensure smooth transition
     setTimeout(() => {
       setShowProfileCard(true);
     }, 100);
   };
 
   const handleContactClick = () => {
-    // Redirect to Gmail with pre-filled email
-    const email = "xxxxx@gmail.com";
+    const email = "contact.casperlee@gmail.com";
     
-    // Gmail compose URL with pre-filled fields
     const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`;
     
     window.open(gmailUrl, '_blank');
