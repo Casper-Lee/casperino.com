@@ -61,6 +61,13 @@
   transform-origin: bottom center;
   will-change: transform;
   transform: translateZ(0);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Final position for top section after cutting */
+.pack-top.split {
+  transform: translateY(-30px) rotateX(-25deg) translateZ(0);
 }
 
 .pack-front-top {
@@ -69,7 +76,7 @@
   height: 100%;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
   border-radius: 20px 20px 0 0;
-  border: 3px solid #4a5568;
+  border: 1px solid #4a5568;
   border-bottom: 1px solid rgba(74, 85, 104, 0.3);
   box-shadow: 
     0 10px 30px rgba(0, 0, 0, 0.3),
@@ -82,6 +89,7 @@
   backface-visibility: hidden;
   transition: all 0.3s ease;
   will-change: transform, box-shadow;
+  transform-style: preserve-3d;
 }
 
 .pack-container:hover .pack-front-top {
@@ -141,6 +149,13 @@
   transform-origin: top center;
   will-change: transform;
   transform: translateZ(0);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Final position for bottom section after cutting */
+.pack-bottom.split {
+  transform: translateY(-5px) rotateX(2deg) translateZ(0);
 }
 
 .pack-front-bottom {
@@ -149,7 +164,7 @@
   height: 100%;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
   border-radius: 0 0 20px 20px;
-  border: 3px solid #4a5568;
+  border: 1px solid #4a5568;
   border-top: 1px solid rgba(74, 85, 104, 0.3);
   box-shadow: 
     0 10px 30px rgba(0, 0, 0, 0.3),
@@ -163,6 +178,7 @@
   will-change: transform, box-shadow;
   overflow: hidden;
   padding: 0;
+  transform-style: preserve-3d;
 }
 
 .pack-container:hover .pack-front-bottom {
@@ -183,6 +199,8 @@
   margin: 0;
   padding: 0;
   display: block;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .pack-container:hover .pack-ghost-full-image {
@@ -414,7 +432,7 @@
   height: 100%;
   background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
   border-radius: 20px;
-  border: 3px solid #4a5568;
+  border: 1px solid #4a5568;
   box-shadow: 
     0 10px 30px rgba(0, 0, 0, 0.3),
     inset 0 2px 10px rgba(255, 255, 255, 0.1);
@@ -727,6 +745,8 @@
   height: 100%;
   pointer-events: none;
   z-index: 15;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .burst-star {
@@ -734,6 +754,8 @@
   font-size: 20px;
   filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
   will-change: transform, opacity;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .burst-star-1 {

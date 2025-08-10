@@ -9,8 +9,6 @@ import {
   MotionValue,
 } from "framer-motion";
 import {
-  Children,
-  cloneElement,
   useEffect,
   useMemo,
   useRef,
@@ -19,7 +17,6 @@ import {
   MouseEvent,
 } from "react";
 import React from "react";
-import Image from "next/image";
 
 import "./Dock.css";
 

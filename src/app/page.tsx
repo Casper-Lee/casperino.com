@@ -10,6 +10,10 @@ import linkedin from "../../public/linkedin.svg";
 import house from "../../public/house.svg";
 import github from "../../public/github.svg";
 import { useRouter } from "next/navigation";
+import { 
+  trackCardOpening, 
+  trackDockClick 
+} from "./_utils/gtm";
 
 export default function Home() {
   const [showProfileCard, setShowProfileCard] = useState(false);
@@ -17,8 +21,8 @@ export default function Home() {
 
   const handleNavigate = (path: string) => {
     // Check if it's an external URL
-    if (path.startsWith('http://') || path.startsWith('https://')) {
-      window.open(path, '_blank', 'noopener,noreferrer');
+    if (path.startsWith("http://") || path.startsWith("https://")) {
+      window.open(path, "_blank", "noopener,noreferrer");
     } else {
       // Internal navigation
       router.push(path);
@@ -38,8 +42,10 @@ export default function Home() {
           />
         </div>
       ),
-      label: "Home",
-      onClick: () => handleNavigate("/"),
+      label: "Card Opening",
+      onClick: () => {
+        setShowProfileCard(false);
+      },
     },
     {
       icon: (
@@ -54,7 +60,10 @@ export default function Home() {
         </div>
       ),
       label: "LinkedIn",
-      onClick: () => handleNavigate("https://www.linkedin.com/in/casper-ljy"),
+      onClick: () => {
+        trackDockClick("LinkedIn", "https://www.linkedin.com/in/casper-ljy");
+        handleNavigate("https://www.linkedin.com/in/casper-ljy");
+      },
     },
     {
       icon: (
@@ -69,16 +78,52 @@ export default function Home() {
         </div>
       ),
       label: "Github",
-      onClick: () => handleNavigate("https://github.com/Casper-Lee"),
+      onClick: () => {
+        trackDockClick("Github", "https://github.com/Casper-Lee");
+        handleNavigate("https://github.com/Casper-Lee");
+      },
     },
   ];
 
   const handleAnimationComplete = () => {
-    // Add a small delay to ensure smooth transition
+    trackCardOpening();
+    
     setTimeout(() => {
       setShowProfileCard(true);
     }, 100);
   };
+
+  const handleContactClick = () => {
+    const email = "contact.casperlee@gmail.com";
+    
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`;
+    
+    window.open(gmailUrl, '_blank');
+  };
+
+  const experience = [
+    {
+      company: "Govtech Singapore",
+      position: "Software Engineer",
+      duration: "Dec 2024 - Present",
+      description:
+        "Built secure AWS Cognito systems, led production release, optimized mobile apps, and reduced UI bugs by 15% with snapshot testing.",
+    },
+    {
+      company: "Mavericks Consulting",
+      position: "Full Stack Developer (Consultant)",
+      duration: "Dec 2022 - Present",
+      description:
+        "Led ReactJS app development, optimized CI/CD, built test suites, and deployed Firebase notifications, cutting bugs by 15% and costs by 20%.",
+    },
+    {
+      company: "Singapore Airlines",
+      position: "Flight Simulator Technician",
+      duration: "June 2019 - Jan 2022",
+      description:
+        "Supported software patches and collaborated on cabin crew training equipment installation, including Virtual Slide Trainer.",
+    },
+  ];
 
   return (
     <div style={{ width: "100vw", height: "100vh", overflow: "hidden" }}>
@@ -96,7 +141,8 @@ export default function Home() {
             showUserInfo={true}
             enableTilt={true}
             enableMobileTilt={false}
-            onContactClick={() => console.log("Contact clicked")}
+            onContactClick={handleContactClick}
+            experience={experience}
           />
           <Dock
             items={items}

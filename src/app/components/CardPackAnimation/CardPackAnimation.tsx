@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import "./CardPackAnimation.css";
+import Image from "next/image";
 
 interface CardPackAnimationProps {
   onAnimationComplete: () => void;
@@ -59,7 +60,6 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
       })
       .to(packRef.current, {
         y: -25,
-        rotationY: 20,
         duration: 0.8,
         ease: "power2.out",
       });
@@ -72,6 +72,16 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
         rotationX: -25,
         duration: 0.8,
         ease: "power2.inOut",
+        onComplete: () => {
+          // Lock the top section in its final position
+          gsap.set(packTopRef.current, {
+            y: -30,
+            rotationX: -25,
+            clearProps: "none"
+          });
+          // Add CSS class to maintain position
+          packTopRef.current?.classList.add('split');
+        },
       },
       "-=0.4"
     ).to(
@@ -81,13 +91,23 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
         rotationX: 2,
         duration: 0.6,
         ease: "power2.inOut",
+        onComplete: () => {
+          // Lock the bottom section in its final position
+          gsap.set(packBottomRef.current, {
+            y: -5,
+            rotationX: 2,
+            clearProps: "none"
+          });
+          // Add CSS class to maintain position
+          packBottomRef.current?.classList.add('split');
+        },
       },
       "-=0.6"
     );
 
     // Smooth star burst animation
     tl.to(
-      burstStarsRef.current?.children,
+      burstStarsRef.current!.children,
       {
         scale: 1,
         opacity: 1,
@@ -97,7 +117,7 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
       "-=0.4"
     )
       .to(
-        burstStarsRef.current?.children,
+        burstStarsRef.current!.children,
         {
           x: (i) => {
             const positions = [
@@ -122,7 +142,7 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
         "-=0.1"
       )
       .to(
-        burstStarsRef.current?.children,
+        burstStarsRef.current!.children,
         {
           scale: 0,
           opacity: 0,
@@ -132,7 +152,7 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
         "-=1.0"
       );
 
-    // Pack fade out
+    // Pack fade out - maintain split positions
     tl.to(
       packRef.current,
       {
@@ -141,6 +161,23 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
         opacity: 0,
         duration: 1.0,
         ease: "power2.in",
+        onUpdate: () => {
+          // Continuously maintain pack sections in their split positions
+          if (packTopRef.current) {
+            gsap.set(packTopRef.current, {
+              y: -30,
+              rotationX: -25,
+              clearProps: "none"
+            });
+          }
+          if (packBottomRef.current) {
+            gsap.set(packBottomRef.current, {
+              y: -5,
+              rotationX: 2,
+              clearProps: "none"
+            });
+          }
+        }
       },
       "-=0.6"
     );
@@ -159,7 +196,7 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
 
     // Sparkle effects
     tl.to(
-      sparklesRef.current?.children,
+      sparklesRef.current!.children,
       {
         scale: 1.8,
         opacity: 1,
@@ -169,7 +206,7 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
       },
       "-=0.8"
     ).to(
-      sparklesRef.current?.children,
+      sparklesRef.current!.children,
       {
         scale: 0,
         opacity: 0,
@@ -184,8 +221,8 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
   useEffect(() => {
     // Initial animations with smoother setup
     gsap.set(revealCardRef.current, { scale: 0, opacity: 0 });
-    gsap.set(sparklesRef.current?.children, { scale: 0, opacity: 0 });
-    gsap.set(burstStarsRef.current?.children, { scale: 0, opacity: 0 });
+    gsap.set(sparklesRef.current!.children, { scale: 0, opacity: 0 });
+    gsap.set(burstStarsRef.current!.children, { scale: 0, opacity: 0 });
 
     // Smoother floating animation for pack
     gsap.to(packRef.current, {
@@ -235,8 +272,10 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
           {/* Pack bottom (remains) */}
           <div ref={packBottomRef} className="pack-bottom">
             <div className="pack-front-bottom">
-              <img 
+              <Image 
                 src="/cuteghost_v2.jpg" 
+                width={200}
+                height={200}
                 alt="Cute Ghost" 
                 className="pack-ghost-full-image"
               />
@@ -309,7 +348,7 @@ const CardPackAnimation: React.FC<CardPackAnimationProps> = ({
 
       {/* Instruction text */}
       <div className={`pack-instruction ${!animationStarted ? "show" : ""}`}>
-        Click to open your mystery pack!
+        Click to open your developer pack!
       </div>
     </div>
   );

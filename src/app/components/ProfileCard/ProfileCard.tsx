@@ -1,7 +1,8 @@
 'use client'
-import React, { useEffect, useRef, useCallback, useMemo } from "react";
+import React, { useEffect, useRef, useCallback, useMemo, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import "./ProfileCard.css";
+import { trackExperienceClick } from "../../_utils/gtm";
 
 // TypeScript interfaces
 interface AnimationConfig {
@@ -38,15 +39,17 @@ interface ProfileCardProps {
   showUserInfo?: boolean;
   onContactClick?: () => void;
   priority?: boolean; // Next.js Image priority prop
+  experience?: Array<{
+    company: string;
+    position: string;
+    duration: string;
+    description: string;
+  }>;
 }
 
 interface DeviceOrientationEvent extends Event {
   beta: number | null;
   gamma: number | null;
-}
-
-interface DeviceMotionEvent extends Event {
-  requestPermission?: () => Promise<string>;
 }
 
 // Extend Window interface for device orientation
@@ -103,9 +106,11 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   showUserInfo = true,
   onContactClick,
   priority = false,
+  experience,
 }) => {
   const wrapRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLElement>(null);
+  const [isFlipped, setIsFlipped] = useState(false);
 
   const animationHandlers = useMemo((): AnimationHandlers | null => {
     if (!enableTilt) return null;
@@ -332,6 +337,12 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     onContactClick?.();
   }, [onContactClick]);
 
+  const handleFlipClick = useCallback((): void => {
+    // Track experience button click
+    trackExperienceClick();
+    setIsFlipped(!isFlipped);
+  }, [isFlipped]);
+
   const handleAvatarError = useCallback((e: React.SyntheticEvent<HTMLImageElement, Event>): void => {
     const target = e.target as HTMLImageElement;
     target.style.display = "none";
@@ -390,6 +401,18 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       className={`pc-card-wrapper ${className}`.trim()}
       style={cardStyle}
     >
+      {/* Flip Button - Outside the card */}
+      <button
+        className="pc-flip-btn-outside"
+        onClick={handleFlipClick}
+        type="button"
+        aria-label="Flip card to see experience"
+      >
+        <span className="flip-icon">🔄</span>
+        <span className="flip-text">{isFlipped ? 'Profile' : 'Experience'}</span>
+      </button>
+
+      {/* Main Profile Card */}
       <section ref={cardRef} className="pc-card">
         <div className="pc-inside">
           {/* Background Image - Covers entire card */}
@@ -399,6 +422,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               style={{ objectFit: "cover" }}
+              alt="background"
             />
           </div>
 
@@ -428,6 +452,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                         "pc-mini-avatar-img", 
                         false
                       )}
+                      alt="mini avatar"
                       fill
                       sizes="40px"
                       style={{ objectFit: "cover" }}
@@ -453,6 +478,44 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
           </div>
         </div>
       </section>
+
+      {/* Experience Modal - Separate from card wrapper */}
+      {isFlipped && (
+        <div className="pc-experience-modal">
+          <div className="pc-experience-modal-content">
+            <div className="pc-experience-header">
+              <h3>Experience</h3>
+              <button
+                className="pc-close-btn"
+                onClick={handleFlipClick}
+                type="button"
+                aria-label="Close experience"
+              >
+                ✕
+              </button>
+            </div>
+            
+            <div className="pc-experience-content">
+              {experience && experience.length > 0 ? (
+                experience.map((exp, index) => (
+                  <div key={index} className="pc-experience-item">
+                    <div className="pc-exp-header">
+                      <h4 className="pc-exp-position">{exp.position}</h4>
+                      <span className="pc-exp-company">{exp.company}</span>
+                    </div>
+                    <div className="pc-exp-duration">{exp.duration}</div>
+                    <p className="pc-exp-description">{exp.description}</p>
+                  </div>
+                ))
+              ) : (
+                <div className="pc-no-experience">
+                  <p>No experience data available</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
