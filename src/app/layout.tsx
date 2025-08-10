@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     shortcut: "/favicon.jpg",
     apple: "/favicon.jpg",
   },
+  robots: { index: false, follow: false },
 };
 
 const GA_ID = process.env.GA_ID;
@@ -32,6 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <meta name="robots" content="noindex,nofollow" />
       <GoogleTagManager gtmId={GA_ID!} />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
