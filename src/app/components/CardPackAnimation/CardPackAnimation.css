@@ -648,8 +648,31 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .pack-container {
-    width: 250px;
-    height: 350px;
+    width: 280px;
+    height: 420px;
+  }
+
+  .pack-front-top {
+    padding: 12px 15px;
+  }
+
+  .pack-top-logo {
+    font-size: 16px;
+    margin-bottom: 3px;
+  }
+
+  .pack-top-subtitle {
+    font-size: 9px;
+    margin-bottom: 2px;
+  }
+
+  .pack-top-series {
+    font-size: 10px;
+    margin-bottom: 2px;
+  }
+
+  .pack-top-description {
+    font-size: 8px;
   }
 
   .pack-brand {
@@ -693,8 +716,31 @@
 
 @media (max-width: 480px) {
   .pack-container {
-    width: 200px;
-    height: 280px;
+    width: 240px;
+    height: 380px;
+  }
+
+  .pack-front-top {
+    padding: 10px 12px;
+  }
+
+  .pack-top-logo {
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+
+  .pack-top-subtitle {
+    font-size: 8px;
+    margin-bottom: 2px;
+  }
+
+  .pack-top-series {
+    font-size: 9px;
+    margin-bottom: 1px;
+  }
+
+  .pack-top-description {
+    font-size: 7px;
   }
 
   .pack-brand {
@@ -733,6 +779,41 @@
   .pack-instruction {
     font-size: 14px;
     bottom: 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .pack-container {
+    width: 200px;
+    height: 320px;
+  }
+
+  .pack-front-top {
+    padding: 8px 10px;
+  }
+
+  .pack-top-logo {
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+
+  .pack-top-subtitle {
+    font-size: 7px;
+    margin-bottom: 1px;
+  }
+
+  .pack-top-series {
+    font-size: 8px;
+    margin-bottom: 1px;
+  }
+
+  .pack-top-description {
+    font-size: 6px;
+  }
+
+  .pack-instruction {
+    font-size: 12px;
+    bottom: 15px;
   }
 } 
 
